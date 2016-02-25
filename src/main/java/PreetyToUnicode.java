@@ -35,10 +35,6 @@ public class PreetyToUnicode {
 
     };// Remove typing mistakes in the original file
 
-//"_","�","�","�","�","�","�","�","�","-","<","="};     // Remove typing mistakes in the original file
-
-//"_","Ö","Ù","Ú","Û","Ü","Þ","Æ","±","-","<","=")    // Punctuation marks
-
     String[] array_two = new String[]{
 
             "ॐ","ऽ","।","m'","m]","mfF","mF",
@@ -146,40 +142,15 @@ public class PreetyToUnicode {
         if (modified_substring != "") // if stringto be converted is non-blank then no need of any processing.
         {
             for (int input_symbol_idx = 0; input_symbol_idx < array_one.length; input_symbol_idx++)
-
             {
-//                System.out.println(input_symbol_idx + " :: " + array_one[input_symbol_idx] + " :: " + array_two[input_symbol_idx] + " :: " + array_one.length);
-
-                //  alert(" modified substring = "+modified_substring)
-
-                //***********************************************************
-                // if (input_symbol_idx==106)
-                //  { alert(" input_symbol_idx = "+input_symbol_idx);
-                //    alert(" input_symbol_idx = "+input_symbol_idx)
-                //; alert(" character =" + modified_substring.CharCodeAt(input_symbol_idx))
-                //     alert(" character = "+modified_string.fromCharCode(input_symbol_idx))
-                //   }
-                // if (input_symbol_idx == 107)
-                //   { alert(" input_symbol_idx = "+input_symbol_idx);
-                //    alert(" character = ",+string.fromCharCode(input_symbol_idx))
-                //   }
-                //***********************************************************
-                int idx = 0; // index of the symbol being searched for replacement
-
-                while (idx != -1) //while-00
+                int idx = 0;
+                while (idx != -1)
                 {
-
                     modified_substring = modified_substring.replace(array_one[input_symbol_idx], array_two[input_symbol_idx]);
                     idx = modified_substring.indexOf(array_one[input_symbol_idx]);
-
-                } // end of while-00 loop
-                // alert(" end of while loop")
-            } // end of for loop
-            // alert(" end of for loop")
-
-            // alert(" modified substring2 = "+modified_substring)
-            //*******************************************************
-            int position_of_i = modified_substring.indexOf("l");
+                }
+            }
+            int position_of_i = modified_substring.indexOf("l"); // replace ि
 
             while (position_of_i != -1) //while-02
             {
@@ -188,60 +159,54 @@ public class PreetyToUnicode {
                 modified_substring = modified_substring.replace(charecter_to_be_replaced, charecter_next_to_i + "ि");
                 position_of_i = modified_substring.indexOf("l", position_of_i + 1); // search for i ahead of the current position.
 
-            } // end of while-02 loop
+            }
 
-            //**********************************************************************************
-            // End of Code for Replacing four Special glyphs
-            //**********************************************************************************
 
-            // following loop to eliminate 'chhotee ee kee maatraa' on half-letters as a result of above transformation.
+            int position_of_wrong_ee = modified_substring.indexOf( "ि्" ) ;
 
-            int position_of_wrong_ee = modified_substring.indexOf("ि्");
-
-            while (position_of_wrong_ee != -1) //while-03
+            while ( position_of_wrong_ee != -1 )  //while-03
 
             {
-                char consonent_next_to_wrong_ee = modified_substring.charAt(position_of_wrong_ee + 2);
-                String charecter_to_be_replaced = "ि्" + consonent_next_to_wrong_ee;
-                modified_substring = modified_substring.replace(charecter_to_be_replaced, "�?" + consonent_next_to_wrong_ee + "ि");
-                position_of_wrong_ee = modified_substring.indexOf("ि्", position_of_wrong_ee + 2); // search for 'wrong ee' ahead of the current position.
+                if(modified_substring.length()>position_of_wrong_ee+2) {
+                    System.out.println(modified_substring.length() + " :: " + position_of_wrong_ee);
+                    char consonent_next_to_wrong_ee = modified_substring.charAt(position_of_wrong_ee + 2);
+                    String charecter_to_be_replaced = "ि्" + consonent_next_to_wrong_ee;
+                    modified_substring = modified_substring.replace(charecter_to_be_replaced, "्" + consonent_next_to_wrong_ee + "ि");
+                    position_of_wrong_ee = modified_substring.indexOf("ि", position_of_wrong_ee + 2); // search for 'wrong ee' ahead of the current position.
+                }
+                else{
+                    position_of_wrong_ee = -1;
+                }
+            } // end of while-03 loop
+
+// following loop to eliminate 'chhotee ee kee maatraa' on half-letters as a result of above transformation.
+
+            position_of_wrong_ee = modified_substring.indexOf( "िं्" );
+
+            while ( position_of_wrong_ee != -1 )  //while-03
+
+            {
+                    char consonent_next_to_wrong_ee = modified_substring.charAt(position_of_wrong_ee + 3);
+                    String charecter_to_be_replaced = "िं्" + consonent_next_to_wrong_ee;
+                    modified_substring = modified_substring.replace(charecter_to_be_replaced, "्" + consonent_next_to_wrong_ee + "िं");
+                    position_of_wrong_ee = modified_substring.indexOf("िं", position_of_wrong_ee + 3);
+
+
 
             } // end of while-03 loop
 
-            // following loop to eliminate 'chhotee ee kee maatraa' on half-letters as a result of above transformation.
-
-            position_of_wrong_ee = modified_substring.indexOf("िं्");
-
-            while (position_of_wrong_ee != -1) //while-03
-
-            {
-                char consonent_next_to_wrong_ee = modified_substring.charAt(position_of_wrong_ee + 3);
-                String charecter_to_be_replaced = "िं्" + consonent_next_to_wrong_ee;
-                modified_substring = modified_substring.replace(charecter_to_be_replaced, "�?" + consonent_next_to_wrong_ee + "िं");
-                position_of_wrong_ee = modified_substring.indexOf("िं्", position_of_wrong_ee + 3); // search for 'wrong ee' ahead of the current position.
-
-            } // end of while-03 loop
-
-
-            // Eliminating reph "Ô" and putting 'half - r' at proper position for this.
-            String set_of_matras = "ा ि ी ु ू ृ े ै ो ौ ं : ँ ॅ";
+            String set_of_matras = "ा ि ी ु ू ृ े ै ो ौ ं : ँ ॅ" ;
             int position_of_R = modified_substring.indexOf("{");
 
-            while (position_of_R > 0) // while-04
-            {
+            while (position_of_R > 0) {
                 int probable_position_of_half_r = position_of_R - 1;
                 char charecter_at_probable_position_of_half_r = modified_substring.charAt(probable_position_of_half_r);
 
-
-                // trying to find non-maatra position left to current O (ie, half -r).
-
-                while (set_of_matras.contains(charecter_at_probable_position_of_half_r + "")) // while-05
-
-                {
+                while (set_of_matras.contains(charecter_at_probable_position_of_half_r + "")) {
                     probable_position_of_half_r = probable_position_of_half_r - 1;
                     charecter_at_probable_position_of_half_r = modified_substring.charAt(probable_position_of_half_r);
 
-                } // end of while-05
+                }
 
 //                System.out.println(probable_position_of_half_r + " :: " + position_of_R + " :: " + (position_of_R - probable_position_of_half_r));
                 String charecter_to_be_replaced = modified_substring.substring(probable_position_of_half_r, probable_position_of_half_r+(position_of_R - probable_position_of_half_r));
@@ -250,11 +215,7 @@ public class PreetyToUnicode {
                 modified_substring = modified_substring.replace(charecter_to_be_replaced, new_replacement_string);
                 position_of_R = modified_substring.indexOf("{");
 
-            } // end of while-04
-
-            // global conversion of punctuation marks
-            //    "=","_","Ö","Ù","‘","Ú","Û","Ü","æ","Æ","±","-","<",
-            //    ".",")","=", ";","…", "’","!","%","“","�?","+","(","?",
+            }
 
             modified_substring = modified_substring.replace( "=" , "." )   ;
             modified_substring = modified_substring.replace( "_" , ")" )   ;
@@ -270,10 +231,10 @@ public class PreetyToUnicode {
             modified_substring = modified_substring.replace( "-" , "(" )   ;
             modified_substring = modified_substring.replace( "<" , "?" )   ;
 
-        } // end of IF  statement  meant to  supress processing of  blank  string.
+        }
         return modified_substring;
     }
 
-} // end of legacy_to_unicode function
+}
 
 

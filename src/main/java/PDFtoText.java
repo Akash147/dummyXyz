@@ -13,8 +13,8 @@ public class PDFtoText {
         PDDocument pd;
         BufferedWriter wr;
         try {
-            File input = new File("C:\\Users\\i81269\\Downloads\\Constitution_of_Nepal-Final.pdf");  // The PDF file from where you would like to extract
-            File output = new File("C:\\Users\\i81269\\Downloads\\Constitution_of_Nepal-Final.txt"); // The text file where you are going to store the extracted data
+            File input = new File("Constitution_of_Nepal-Final.pdf");  // The PDF file from where you would like to extract
+            File output = new File("Constitution_of_Nepal-Final.txt"); // The text file where you are going to store the extracted data
             pd = PDDocument.load(input);
             System.out.println(pd.getNumberOfPages());
             System.out.println(pd.isEncrypted());
@@ -41,8 +41,8 @@ public class PDFtoText {
             FileOutputStream out = null;
 
             try {
-                in = new FileInputStream("C:\\Users\\i81269\\Downloads\\Constitution_of_Nepal-Final.txt");
-                out = new FileOutputStream("C:\\Users\\i81269\\Downloads\\Constitution_of_Nepal-Final-Unicode.txt");
+                in = new FileInputStream("Constitution_of_Nepal-Final.txt");
+                out = new FileOutputStream("Constitution_of_Nepal-Final-Unicode.txt");
 
                 String line;
                 InputStreamReader isr = new InputStreamReader(in);
