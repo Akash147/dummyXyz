@@ -168,7 +168,7 @@ public class PreetyToUnicode {
 
             {
                 if(modified_substring.length()>position_of_wrong_ee+2) {
-                    System.out.println(modified_substring.length() + " :: " + position_of_wrong_ee);
+//                    System.out.println(modified_substring.length() + " :: " + position_of_wrong_ee);
                     char consonent_next_to_wrong_ee = modified_substring.charAt(position_of_wrong_ee + 2);
                     String charecter_to_be_replaced = "ि्" + consonent_next_to_wrong_ee;
                     modified_substring = modified_substring.replace(charecter_to_be_replaced, "्" + consonent_next_to_wrong_ee + "ि");
